@@ -4,8 +4,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
+        <h1 className="display-1">React First App</h1>
       <header className="App-header">
-        <p class="Display-6">React First App</p>
+        
       </header>
     </div>
   );
