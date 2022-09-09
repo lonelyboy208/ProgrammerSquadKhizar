@@ -2,19 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 function WarningBanner(props) {
-  if (!props.warn) {    return null;  }
+  if (!props.warn) {
+    return null;  
+  }
+  
   return (
     <div className="warning">
-      Warning!
+      <p className='display-1'>Warning!</p>
     </div>
   );
 }
 
 class Page extends React.Component {
   constructor(props) {
+
     super(props);
     this.state = {showWarning: true};
+    
+    //Binding 
     this.handleToggleClick = this.handleToggleClick.bind(this);
+
   }
 
   handleToggleClick() {
@@ -26,10 +33,10 @@ class Page extends React.Component {
   render() {
     return (
       <div>
-        <WarningBanner warn={this.state.showWarning} />
-        <button onClick={this.handleToggleClick}>
-          {this.state.showWarning ? 'Hide' : 'Show'}
+        <button onClick={this.handleToggleClick} className='btn btn-lg btn-light'>
+          {this.state.showWarning ? '1' : '0'}
         </button>
+        <WarningBanner warn={this.state.showWarning} />
       </div>
     );
   }
