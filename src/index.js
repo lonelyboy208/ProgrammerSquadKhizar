@@ -10,16 +10,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+  const posts = [
+    { id: 1, title: 'Hello World', content: 'Welcome to learning React!' },
+    { id: 2, title: 'Installation', content: 'You can install React from npm.' }
+  ];
+
+  root.render(
+
   <React.StrictMode>
     <Blog posts={posts} />
   </React.StrictMode>
 );
 
-const posts = [
-  { id: 1, title: 'Hello World', content: 'Welcome to learning React!' },
-  { id: 2, title: 'Installation', content: 'You can install React from npm.' }
-];
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

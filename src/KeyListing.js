@@ -1,4 +1,5 @@
 function Blog(props) {
+
   const sidebar = (
   <ul>
     {props.posts.map((post) =>
@@ -11,7 +12,7 @@ function Blog(props) {
     <p>{post.content}</p>
   </div>
   );
-  return (
+  return ( 
     <div>
       {sidebar}      
         <hr/>
@@ -20,9 +21,5 @@ function Blog(props) {
   );
 }
 
-const posts = [
-  { id: 1, title: 'Hello World', content: 'Welcome to learning React!' },
-  { id: 2, title: 'Installation', content: 'You can install React from npm.' }
-];
 
 export default Blog;
