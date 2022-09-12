@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import Page from './Toggles';
+// import App from './App';
+// import Page from './Toggles';
 import Blog from './KeyListing';
 
 import reportWebVitals from './reportWebVitals';
