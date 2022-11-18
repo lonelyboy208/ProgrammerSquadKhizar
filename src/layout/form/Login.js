@@ -32,10 +32,6 @@ class SignupForm extends React.Component {
     var data = JSON.stringify({
       "email": this.state.email,
       "password": this.state.password,
-      "type": this.state.account,
-      "fname": this.state.fname,
-      "lname": this.state.lname,
-      "gender": this.state.gender
     });
 
        

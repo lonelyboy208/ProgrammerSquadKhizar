@@ -1,28 +1,35 @@
 import React from 'react';
-
 import axios from 'axios';
 
-
 class SignupForm extends React.Component {
-  
+
   constructor(props) {
     super(props);
-    
+
     this.state = {
         email: '',
         password: '',
+        account: '0',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAccount = this.handleAccount.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.DisplayFun = this.DisplayFun.bind(this);
+
   }
 
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    this.setState({
-      [name]: value    });
+    this.setState({ [name]: value });
+  }
+
+  handleAccount(event) {
+    const target = event.target;
+    const value = target.value;
+    this.setState({ account: value });
   }
 
   handleSubmit(event) {
@@ -38,14 +45,14 @@ class SignupForm extends React.Component {
       "gender": this.state.gender
     });
 
-       
+
     if(this.state.confirm_password === this.state.password){
-      
+
 
       var config = {
         method: 'post',
         url: 'localhost:5000/auth/signup',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json'
         },
         data : data
@@ -64,10 +71,50 @@ class SignupForm extends React.Component {
     }
   }
 
-    render() {
-      
-      
-      return (
+  DisplayFun(props){
+
+    if(props.acctype === 0){
+
+      return(
+        <div className='justify-content-center hstack gap-3'>
+
+          <input name="fname" id="" className="form-control form-control-lg" type="text" placeholder="First Name"
+          onChange={SignupForm.handleInputChange}
+          />
+
+          <input name="lname" id="" className="form-control form-control-lg" type="text" placeholder="Last Name"
+          onChange={SignupForm.handleInputChange}
+          />
+
+        </div>
+      )
+
+    }
+
+    if(props.acctype === 1) {
+      return(
+        <div className='justify-content-center hstack gap-3'>
+
+          <input name="bname" id="" className="form-control form-control-lg" type="text" placeholder="Business Name"
+          onChange={SignupForm.handleInputChange}
+          />
+
+          <input name="bcate" id="" className="form-control form-control-lg" type="text" placeholder="Business Category"
+          onChange={SignupForm.handleInputChange}
+          />
+
+        </div>
+      )
+    }
+
+  }
+
+  render() {
+
+    const acc = parseInt(this.state.account);
+    console.log(this.state.account, "acc type");
+
+    return (
 
   <div className='d-flex justify-content-center'>
     <form className='form-floating bg-white rounded-3 shadow p-3 w-50' name="form" id='form' onSubmit={this.handleSubmit}>
@@ -80,24 +127,12 @@ class SignupForm extends React.Component {
         </div>
 
         <select className="form-select form-select-lg text-secondary" name='account'
-          value={this.state.account} onChange={this.handleInputChange} defaultValue={'Account Type'}
-        >
-            <option selected disabled>Account type</option>
-            <option value="0">Personal Account</option>
-            <option value="1">Business Account</option>
+          value={this.state.account} onChange={this.handleAccount}>
+          <option value='0'>Personal Account</option>
+          <option value="1">Business Account</option>
         </select>
 
-        <div className='justify-content-center hstack gap-3'>
-
-          <input name="fname" id="" className="form-control form-control-lg" type="text" placeholder="First Name"
-          value={this.state.fname} onChange={this.handleInputChange}
-          />
-
-          <input name="lname" id="" className="form-control form-control-lg" type="text" placeholder="Last Name"
-          value={this.state.lname} onChange={this.handleInputChange}
-          />
-
-        </div>
+        <this.DisplayFun acctype={acc}/>
 
         <div className='justify-content-center hstack gap-3'>          
 
@@ -109,10 +144,8 @@ class SignupForm extends React.Component {
 
         </div>
 
-        <select className="form-select form-select-lg text-secondary" name="b_cate"
-          value={this.state.gender} onChange={this.handleInputChange} defaultValue={'Gender'}
-        >
-            <option selected disabled>Gender</option>
+        <select className="form-select form-select-lg text-secondary" name="gender"
+          value={this.state.gender} onChange={this.handleInputChange}> 
             <option value="Male">Male</option>
             <option value="Female">Female</option>
         </select>
@@ -134,8 +167,8 @@ class SignupForm extends React.Component {
       </div>
     </form>
   </div>
-      );
-    }
+    );
   }
+}
 
 export default SignupForm;

@@ -1,6 +1,6 @@
 import React from 'react';
 import SignupForm from './form/Signup';
-import LoginForm from './form/Login';
+// import Search from './form/Search';
 
 
 const body = (
@@ -11,8 +11,8 @@ const body = (
         <p className="lead">
             This is a lead paragraph.
         </p>
-            
-            <LoginForm/>
+
+        <SignupForm/>
 
     </div>
     </center>

@@ -1,30 +1,57 @@
 import React from 'react';
 import axios from 'axios';
-
+var form = document.getElementbyId('form');
 const SignupForm = () => {
-  
+
   const [formValue, setformValue] = React.useState({
     email: '',
     password: ''
   });
 
   const handleSubmit = async() => {
+
+    // form.preventDefault();
+
+    console.log("Running Submit");
     // store the states in the form data
     const loginFormData = new FormData();
-    loginFormData.append("username", formValue.email)
-    loginFormData.append("password", formValue.password)
-  
+    loginFormData.append("username", formValue.email);
+    loginFormData.append("password", formValue.password);
+
+    var data = JSON.stringify({
+      email: formValue.email,
+      password: formValue.password,
+      // "type": this.state.account,
+      // "fname": this.state.fname,
+      // "lname": this.state.lname,
+      // "gender": this.state.gender
+    });
+
+    console.log(data);
+
     try {
       // make axios post request
-      const response = await axios({
-        method: "post",
-        url: "/api/login",
-        data: loginFormData,
-        headers: { "Content-Type": "multipart/form-data" },
+
+      var config = {
+        method: 'post',
+        url: 'http://localhost:5000/auth/login',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data : loginFormData
+
+      };
+
+
+      axios(config).then(function (response) {
+
+          document.write(JSON.stringify(response) + "<br/>");
+
       });
-      console.log(response);
+      console.log("I'm a response");
+
     } catch(error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -37,7 +64,7 @@ const SignupForm = () => {
 
   return (
   <div className='d-flex justify-content-center'>
-    <form className='form-floating bg-white rounded-3 shadow p-3 w-50' name="form" id='form' onSubmit={handleSubmit}>
+    <form className='form-floating bg-white rounded-3 shadow p-3 w-50' name="form" id='form' onSubmit="return false">
       <div className='p-3 vstack gap-3'>
 
         <div className='justify-content-center hstack gap-3'>
@@ -49,7 +76,6 @@ const SignupForm = () => {
         <select className="form-select form-select-lg text-secondary">
             <option value="0">Personal Account</option>
             <option value="1">Business Account</option>
-
         </select>
 
         <div className='justify-content-center hstack gap-3'>
@@ -60,10 +86,10 @@ const SignupForm = () => {
 
         </div>
 
-        <div className='justify-content-center hstack gap-3'>          
+        <div className='justify-content-center hstack gap-3'>
 
           <input name="dob" id="" type="number" className="form-control form-control-lg" min="1" max="31" step="1" placeholder="day" />
-        
+
           <input name="mob" id="" type="number" className="form-control form-control-lg" min="1" max="12" step="1" placeholder="Month" />
 
           <input name="yob" id="" type="number" className="form-control form-control-lg" min="1900" max="2099" step="1" placeholder="Year" />
@@ -89,7 +115,7 @@ const SignupForm = () => {
 
         <input name="confirm_password" id="" className="form-control form-control-lg" type="password" placeholder="Confirm Password"/>
 
-        <input name="submit" id="" className="btn btn-lg btn-secondary d-flex align-self-center w-50" type="submit"/>
+        <input name="submit" id="" className="btn btn-lg btn-secondary d-flex align-self-center w-50" onClick={handleSubmit}/>
 
       </div>
     </form>
